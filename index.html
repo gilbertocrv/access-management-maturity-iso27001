@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Access Management Maturity - ISO 27001:2022</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f4f6f8; margin:20px; }
+.container { max-width:1100px; margin:auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+h1 { margin:0; }
+h2 { margin-top:30px; border-bottom:2px solid #003366; padding-bottom:5px; }
+table { width:100%; border-collapse:collapse; margin-top:15px; }
+th, td { padding:10px; border:1px solid #ddd; }
+th { background:#003366; color:white; }
+select { width:100%; padding:5px; }
+.score-box { margin-top:20px; padding:15px; background:#eef2f7; border-radius:6px; }
+button { margin-top:20px; padding:10px 15px; background:#003366; color:white; border:none; border-radius:4px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Access Management Maturity Assessment</h1>
+<p><strong>Base:</strong> ISO 27001:2022 – Controles 5.15, 5.16, 5.17, 5.18, 8.2, 8.3, 8.5</p>
+
+<div id="assessment"></div>
+
+<div class="score-box">
+<h2>Resultado</h2>
+<p><strong>Maturidade Geral:</strong> <span id="overallScore">0</span></p>
+<p><strong>Classificação:</strong> <span id="classification">-</span></p>
+</div>
+
+<button onclick="calculateMaturity()">Calcular Maturidade</button>
+</div>
+
+<script>
+
+const domains = {
+    "Governança de Acesso (5.15)": [
+        "Modelo formal de controle de acesso definido (RBAC/ABAC)?",
+        "Responsabilidade do Information Owner formalizada?",
+        "Matriz de Segregação de Funções documentada?"
+    ],
+    "Gestão de Identidades (5.16 / 5.18)": [
+        "Ciclo de vida de identidade integrado ao RH?",
+        "Processo formal de desprovisionamento imediato?",
+        "Revisões periódicas de acesso implementadas?"
+    ],
+    "Gestão de Privilégios (8.2 / 8.3)": [
+        "Contas privilegiadas segregadas?",
+        "Monitoramento de atividades privilegiadas?",
+        "Privilégios revisados periodicamente?"
+    ],
+    "Autenticação e Credenciais (5.17 / 8.5)": [
+        "Política de gestão de credenciais formalizada?",
+        "MFA implementado para acessos críticos?",
+        "Proteção contra uso indevido de credenciais?"
+    ]
+};
+
+const assessmentDiv = document.getElementById("assessment");
+
+for (const domain in domains) {
+    let section = `<h2>${domain}</h2><table><tr><th>Critério Arquitetural</th><th>Nível (0-5)</th></tr>`;
+    domains[domain].forEach(question => {
+        section += `
+        <tr>
+            <td>${question}</td>
+            <td>
+                <select class="score">
+                    <option value="0">0 - Inexistente</option>
+                    <option value="1">1 - Ad-hoc</option>
+                    <option value="2">2 - Documentado</option>
+                    <option value="3">3 - Padronizado</option>
+                    <option value="4">4 - Automatizado</option>
+                    <option value="5">5 - Baseado em Risco</option>
+                </select>
+            </td>
+        </tr>`;
+    });
+    section += "</table>";
+    assessmentDiv.innerHTML += section;
+}
+
+function calculateMaturity() {
+    const scores = document.querySelectorAll(".score");
+    let total = 0;
+    scores.forEach(s => total += parseInt(s.value));
+    let average = (total / scores.length).toFixed(2);
+
+    document.getElementById("overallScore").innerText = average;
+
+    let classification = "";
+    if (average <= 1) classification = "Inicial";
+    else if (average <= 2) classification = "Básico";
+    else if (average <= 3) classification = "Estruturado";
+    else if (average <= 4) classification = "Gerenciado";
+    else classification = "Otimizado";
+
+    document.getElementById("classification").innerText = classification;
+}
+
+</script>
+
+</body>
+</html>
