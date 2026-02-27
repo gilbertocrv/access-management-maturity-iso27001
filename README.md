@@ -25,3 +25,6 @@ Permite testar controles de acesso e identidade de forma prática, sem depender 
 1. Clone o repositório:
 ```bash
 git clone https://github.com/seunome/access-management-maturity-iso27001.git
+
+## Abrir online
+[Abrir checklist no navegador](https://gilbertocrv.github.io/access-management-maturity-iso27001/)
