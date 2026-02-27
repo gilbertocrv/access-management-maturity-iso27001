@@ -1,4 +1,4 @@
-#  Access Management Maturity Model
+# 🔐 Access Management Maturity Model
 **Versão:** 1.0  
 **Base normativa:** ISO/IEC 27001:2022 + ISO 27701  
 
@@ -22,9 +22,11 @@ Permite testar controles de acesso e identidade de forma prática, sem depender 
 - Peso 2 – Controle Complementar
 
 ## Como Executar
+
+- **Abrir online via GitHub Pages:**  
+[Abrir checklist no navegador](https://gilbertocrv.github.io/access-management-maturity-iso27001/)  
+
+- **Abrir localmente:**  
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seunome/access-management-maturity-iso27001.git
-
-## Abrir online
-[Abrir checklist no navegador](https://gilbertocrv.github.io/access-management-maturity-iso27001/)
+git clone https://github.com/gilbertocrv/access-management-maturity-iso27001.git
